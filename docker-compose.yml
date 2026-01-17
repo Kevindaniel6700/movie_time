@@ -19,7 +19,7 @@ services:
 
   # Python Backend API
   api:
-    build: ./backend
+    build: ./movie_time_backend
     container_name: movie-explorer-api
     ports:
       - "8000:8000"
@@ -41,7 +41,7 @@ services:
 
   # React Frontend (Vite + Nginx)
   frontend:
-    build: ./cinestream-view
+    build: ./movie_time_frontend
     container_name: movie-explorer-frontend
     ports:
       - "8080:80"

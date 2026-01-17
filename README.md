@@ -47,12 +47,12 @@ docker-compose down -v
 
 ```
 Movie Time/
-├── backend/              # FastAPI backend (Python)
+├── movie_time_backend/   # FastAPI backend (Python)
 │   ├── app/              # Application code
 │   ├── Dockerfile        # Backend container
 │   ├── entrypoint.sh     # Startup script with DB seeding
 │   └── seed_data.py      # Database seeding script
-├── cinestream-view/      # React frontend (Vite + TypeScript)
+├── movie_time_frontend/  # React frontend (Vite + TypeScript)
 │   ├── src/              # Source code
 │   ├── Dockerfile        # Frontend container (multi-stage)
 │   └── nginx.conf        # Nginx configuration
@@ -64,7 +64,7 @@ Movie Time/
 
 ### Backend (Local)
 ```bash
-cd backend
+cd movie_time_backend
 pip install -r requirements.txt
 python3 seed_data.py        # Seed database
 uvicorn app.main:app --reload
@@ -72,7 +72,7 @@ uvicorn app.main:app --reload
 
 ### Frontend (Local)
 ```bash
-cd cinestream-view
+cd movie_time_frontend
 npm install
 npm run dev
 ```
@@ -81,9 +81,9 @@ npm run dev
 
 ```bash
 # Backend tests
-cd backend && pytest
+cd movie_time_backend && pytest
 
 # Frontend tests
-cd cinestream-view && npm test
+cd movie_time_frontend && npm test
 ```
 
