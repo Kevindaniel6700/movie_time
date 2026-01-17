@@ -1,0 +1,59 @@
+services:
+  # MongoDB Database (starts first)
+  mongodb:
+    image: mongo:7.0
+    container_name: movie-explorer-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - movie-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  # Python Backend API
+  api:
+    build: ./backend
+    container_name: movie-explorer-api
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - DATABASE_NAME=movie_explorer
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - movie-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # React Frontend (Vite + Nginx)
+  frontend:
+    build: ./cinestream-view
+    container_name: movie-explorer-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    networks:
+      - movie-network
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+
+networks:
+  movie-network:
+    driver: bridge

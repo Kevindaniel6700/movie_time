@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+coverage/
+
+# Docker
+*.pid
+
+# Package locks (optional - uncomment if you want to ignore)
+# package-lock.json
+# bun.lockb
+
+# Large data files
+movies_large.json
+
+# OS files
+Thumbs.db
