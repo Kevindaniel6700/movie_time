@@ -2,7 +2,7 @@ services:
   # MongoDB Database (starts first)
   mongodb:
     image: mongo:7.0
-    command: ["mongod", "--quiet", "--logComponentVerbosity", "{\"network\": {\"verbosity\": -1}, \"accessControl\": {\"verbosity\": -1}, \"command\": {\"verbosity\": -1}}"]
+    # command removed to use default
     container_name: movie-explorer-mongodb
     ports:
       - "27017:27017"
